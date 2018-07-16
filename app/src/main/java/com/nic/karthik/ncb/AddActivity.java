@@ -1,5 +1,7 @@
 package com.nic.karthik.ncb;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ public class AddActivity extends AppCompatActivity {
     ImageButton photo;
     Button add;
     String name, address, desc;
-
+    Bitmap image1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,8 @@ public class AddActivity extends AppCompatActivity {
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //handle photo event here
+                Intent intent = new Intent(AddActivity.this, Main2Activity.class);
+                startActivity(intent);
             }
         });
 
@@ -39,6 +42,12 @@ public class AddActivity extends AppCompatActivity {
                 name = textName.getText().toString().trim();
                 address = textAddress.getText().toString().trim();
                 desc = textDesc.getText().toString().trim();
+                Intent i = getIntent();
+                Bundle extras = i.getExtras();
+                assert extras != null;
+                image1 = (Bitmap) extras.get("data");
+                photo.setImageBitmap(image1);
+
             }
         });
     }
