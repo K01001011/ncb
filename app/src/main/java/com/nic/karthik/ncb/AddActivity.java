@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,6 +36,8 @@ public class AddActivity extends AppCompatActivity {
     Bitmap image1;
     StorageReference storageReference;
     DatabaseReference database;
+    FirebaseAuth auth;
+    String UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class AddActivity extends AppCompatActivity {
         photo = findViewById(R.id.imageButton);
         database = FirebaseDatabase.getInstance().getReference().child("Data");
         storageReference = FirebaseStorage.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
+        UID = auth.getCurrentUser().getUid();
 
         add = findViewById(R.id.add);
 
@@ -94,6 +99,7 @@ public class AddActivity extends AppCompatActivity {
                         data.put("Address", address);
                         data.put("Description", desc);
                         data.put("ID", ID);
+                        data.put("UID", UID);
                         data.put("URL", downloadUrl.toString());
                         database.child(ID).setValue(data);
                     }
