@@ -38,6 +38,7 @@ public class Main2Activity extends AppCompatActivity {
     ImageView imageview;
     String imageloc;
     Camera letstrythis;
+    Bitmap image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Main2Activity.this,AddActivity.class);
-                intent.putExtra("image", (Parcelable) imageview);
+                intent.putExtra("image", image);
                 startActivityForResult(intent,3);
             }
         });
@@ -130,7 +131,7 @@ public class Main2Activity extends AppCompatActivity {
             {
                 Bundle extras = data.getExtras();
                 assert extras != null;
-                Bitmap image = (Bitmap) extras.get("data");
+                image = (Bitmap) extras.get("data");
                 ImageView imageview = findViewById(R.id.imageView); //sets imageview as the bitmap
                 imageview.setImageBitmap(image);
             }
