@@ -2,6 +2,7 @@ package com.nic.karthik.ncb;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class AddActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         UID = auth.getCurrentUser().getUid();
+        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_settings_black);
 
         add = findViewById(R.id.add);
 
@@ -74,8 +76,8 @@ public class AddActivity extends AppCompatActivity {
                 desc = textDesc.getText().toString().trim();
                 Intent i = getIntent();
                 Bundle extras = i.getExtras();
-                assert extras != null;
-                image1 = (Bitmap) extras.get("data");
+                if(extras!=null)
+                    image1 = (Bitmap) extras.get("data");
                 photo.setImageBitmap(image1);
 
                 ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
@@ -102,6 +104,9 @@ public class AddActivity extends AppCompatActivity {
                         data.put("UID", UID);
                         data.put("URL", downloadUrl.toString());
                         database.child(ID).setValue(data);
+                        Toast.makeText(getApplicationContext(), "CUSTOMER ADDED", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
