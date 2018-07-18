@@ -24,12 +24,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 /*import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 */
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class AddActivity extends AppCompatActivity {
@@ -39,7 +42,7 @@ public class AddActivity extends AppCompatActivity {
     Button add;
     String name, address, desc;
     Bitmap image1;
-    //StorageReference storageReference;
+    StorageReference storageReference;
     DatabaseReference database;
     FirebaseAuth auth;
     String UID, loc;
@@ -58,7 +61,7 @@ public class AddActivity extends AppCompatActivity {
         //storageReference = FirebaseStorage.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
         UID = auth.getCurrentUser().getUid();
-        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_settings_black);
+        image1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_foreground);
 
         add = findViewById(R.id.add);
 
@@ -122,7 +125,7 @@ public class AddActivity extends AppCompatActivity {
                 image1.compress(Bitmap.CompressFormat.JPEG, 100, byteArray);
                 final byte[] thumbByteArray = byteArray.toByteArray();
 
-                /*StorageReference filePath = storageReference.child("PICS").child(ID + ".jpg");
+                StorageReference filePath = storageReference.child("PICS").child(ID + ".jpg");
 
                 UploadTask uploadTask = filePath.putBytes(thumbByteArray);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -134,7 +137,7 @@ public class AddActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        HashMap data = new HashMap<String, String>();
+                        HashMap<String, String> data = new HashMap<>();
                         data.put("Name", name);
                         data.put("Address", address);
                         data.put("Description", desc);
@@ -148,7 +151,7 @@ public class AddActivity extends AppCompatActivity {
                         Intent intent = new Intent(AddActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
-                });*/
+                });
             }
         });
     }
