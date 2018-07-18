@@ -34,7 +34,6 @@ import java.util.Date;
 
 public class Main2Activity extends AppCompatActivity {
     Context c;
-    int x;
     Uri imageuri;
     Bitmap image;
     ImageView imageview;
@@ -69,10 +68,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Main2Activity.this,AddActivity.class);
-                if(x==0)
-                    intent.putExtra("image", image);
-                if(x==1)
-                    intent.putExtra("image", imageuri);
+                intent.putExtra("image", image);
                 startActivityForResult(intent,3);
             }
         });
@@ -133,7 +129,6 @@ public class Main2Activity extends AppCompatActivity {
         {
             if(requestCode==1)
             {
-                x = 0;
                 Bundle extras = data.getExtras();
                 assert extras != null;
                 image = (Bitmap) extras.get("data");
@@ -142,9 +137,15 @@ public class Main2Activity extends AppCompatActivity {
             }
             if((requestCode== 0b1100100))
             {
-                x = 1;
+
                 imageuri =data.getData();
                 imageview.setImageURI(imageuri);
+                try {
+                    image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageuri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
             if(requestCode == 3){
 
