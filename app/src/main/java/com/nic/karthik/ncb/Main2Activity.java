@@ -34,7 +34,9 @@ import java.util.Date;
 
 public class Main2Activity extends AppCompatActivity {
     Context c;
+    int x;
     Uri imageuri;
+    Bitmap image;
     ImageView imageview;
     String imageloc;
     Camera letstrythis;
@@ -67,7 +69,10 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Main2Activity.this,AddActivity.class);
-                intent.putExtra("image", (Parcelable) imageview);
+                if(x==0)
+                    intent.putExtra("image", image);
+                if(x==1)
+                    intent.putExtra("image", imageuri);
                 startActivityForResult(intent,3);
             }
         });
@@ -128,18 +133,18 @@ public class Main2Activity extends AppCompatActivity {
         {
             if(requestCode==1)
             {
+                x = 0;
                 Bundle extras = data.getExtras();
                 assert extras != null;
-                Bitmap image = (Bitmap) extras.get("data");
+                image = (Bitmap) extras.get("data");
                 ImageView imageview = (ImageView) findViewById(R.id.imageView); //sets imageview as the bitmap
                 imageview.setImageBitmap(image);
             }
             if((requestCode== 0b1100100))
             {
+                x = 1;
                 imageuri =data.getData();
                 imageview.setImageURI(imageuri);
-
-
             }
             if(requestCode == 3){
 

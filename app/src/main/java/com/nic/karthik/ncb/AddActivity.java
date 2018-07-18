@@ -33,7 +33,6 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-
         textName = findViewById(R.id.editText);
         textAddress = findViewById(R.id.editText2);
         textDesc = findViewById(R.id.editText3);
@@ -87,7 +86,7 @@ public class AddActivity extends AppCompatActivity {
                 Intent i = getIntent();
                 Bundle extras = i.getExtras();
                 assert extras != null;
-                image1 = (Bitmap) extras.get("data");
+                image1 = (Bitmap) extras.get("image");
                 photo.setImageBitmap(image1);
                 double lat = l[0].getLatitude();
                 double lon = l[0].getLongitude();
