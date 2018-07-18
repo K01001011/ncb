@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     EditText username,password;
-    Button Login,BRegister;
+    Button Login,BRegister, adminLogin;
     FirebaseAuth Auth;
     FirebaseAuth.AuthStateListener Authlistener;
 
@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         Login = findViewById(R.id.loginButton);
         BRegister = findViewById(R.id.register);
+        adminLogin = findViewById(R.id.admin);
 
         BRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+        adminLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = username.getText().toString().trim();
+                String pass = password.getText().toString().trim();
+                if(email.equals("ncbadmin") && pass.equals("adminpassword"))
+                {
+                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "CHECK USERNAME AND PASSWORD", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -96,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful())
                     {
-                        Toast.makeText(LoginActivity.this, "PROBLEM SIGNING IN", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "CHECK USERNAME AND PASSWORD", Toast.LENGTH_LONG).show();
                     }
                 }
             });

@@ -44,7 +44,18 @@
         android:hint="enter password"
         android:layout_marginBottom="1dp"/>
 
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/privateKey"
+        android:inputType="textPassword"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
+        android:maxLines="1"
+        android:hint="enter private key"
+        android:layout_marginBottom="1dp"/>
 
     <Button
         android:layout_width="wrap_content"
