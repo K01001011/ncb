@@ -112,6 +112,7 @@ public class AddActivity extends AppCompatActivity {
                         data.put("ID", ID);
                         data.put("UID", UID);
                         data.put("URL", downloadUrl.toString());
+                        data.put("Location",loc);
                         database.child(ID).setValue(data);
                         Toast.makeText(getApplicationContext(), "CUSTOMER ADDED", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(AddActivity.this, MainActivity.class);
