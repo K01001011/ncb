@@ -75,7 +75,7 @@ public class Main2Activity extends AppCompatActivity {
 
     }
     private void checkcameraPremisssion() {
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT>22){
             int per = this.checkSelfPermission(Manifest.permission.CAMERA);
             if(per!=0){
                 this.requestPermissions(new String[]{Manifest.permission.CAMERA},1);
